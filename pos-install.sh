@@ -23,6 +23,14 @@ if [ "$EUID" -eq 0 ]; then
 fi
 
 # ===============================================
+# 0. ATUALIZAR SISTEMA E PRÉ-REQUISITOS
+# ===============================================
+echo -e "${YELLOW}[0] Atualizando o sistema e instalando pré-requisitos...${NC}"
+sudo pacman -Syu --noconfirm
+sudo pacman -S --needed --noconfirm git curl base-devel
+echo -e "${GREEN}✓ Sistema atualizado e pré-requisitos instalados${NC}"
+
+# ===============================================
 # 1. CONFIGURAR SDDM COM TEMA BREEZE DO PLASMA
 # ===============================================
 echo -e "${YELLOW}[1/8] Configurando SDDM com tema Breeze do Plasma...${NC}"
