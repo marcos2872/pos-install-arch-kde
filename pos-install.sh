@@ -77,8 +77,15 @@ fi
 # 4. INSTALAR NVM E NODE.JS
 # ===============================================
 if [ ! -d "$HOME/.nvm" ]; then
-    echo -e "${YELLOW}[4/8] Instalando NVM...${NC}"
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+    echo -e "${YELLOW}[4/8] Instalando NVM (última versão)...${NC}"
+    NVM_TAG=$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | sed -n 's/.*"tag_name":[[:space:]]*"\(v[^"]*\)".*/\1/p' | head -n1)
+    if [ -z "$NVM_TAG" ]; then
+        NVM_TAG="v0.40.1"
+        echo -e "${YELLOW}Não foi possível obter a última versão do NVM; usando ${NVM_TAG}${NC}"
+    else
+        echo -e "${GREEN}Última versão do NVM: ${NVM_TAG}${NC}"
+    fi
+    curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_TAG}/install.sh | bash
     
     # Carregar NVM no script atual
     export NVM_DIR="$HOME/.nvm"
@@ -106,6 +113,19 @@ else
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     if command -v node &> /dev/null; then
         echo -e "${GREEN}Node.js: $(node --version)${NC}"
+    fi
+    # Verificar se há versão mais recente do NVM e atualizar se necessário
+    CURRENT_NVM_VER=$(nvm --version 2>/dev/null || true)
+    NVM_LATEST_TAG=$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | sed -n 's/.*"tag_name":[[:space:]]*"\(v[^"]*\)".*/\1/p' | head -n1)
+    if [ -n "$NVM_LATEST_TAG" ] && [ -n "$CURRENT_NVM_VER" ] && [ "$CURRENT_NVM_VER" != "${NVM_LATEST_TAG#v}" ]; then
+        echo -e "${YELLOW}Atualizando NVM de v${CURRENT_NVM_VER} para ${NVM_LATEST_TAG}...${NC}"
+        curl -fsSL https://raw.githubusercontent.com/nvm-sh/nvm/${NVM_LATEST_TAG}/install.sh | bash
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        echo -e "${GREEN}✓ NVM atualizado para ${NVM_LATEST_TAG}${NC}"
+    elif [ -n "$CURRENT_NVM_VER" ]; then
+        echo -e "${GREEN}NVM já está na última versão (${CURRENT_NVM_VER})${NC}"
+    else
+        echo -e "${YELLOW}Não foi possível verificar a última versão do NVM (sem internet ou limite da API). Mantendo versão atual.${NC}"
     fi
     # Instalar pnpm se ainda não estiver disponível
     if ! command -v pnpm &> /dev/null; then
