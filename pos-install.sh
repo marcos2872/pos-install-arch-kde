@@ -196,6 +196,28 @@ read -p "Deseja instalar o jetbrains-toolbox? (s/n) " install_jetbrains
 if [[ "$install_jetbrains" == "s" ]]; then
     yay -S --noconfirm jetbrains-toolbox
     echo -e "${GREEN}✓ JetBrains Toolbox instalado${NC}"
+    
+    # Desabilitar autostart do JetBrains Toolbox
+    AUTOSTART_DIR="$HOME/.config/autostart"
+    JETBRAINS_AUTOSTART="$AUTOSTART_DIR/jetbrains-toolbox.desktop"
+    
+    if [ -f "$JETBRAINS_AUTOSTART" ]; then
+        rm -f "$JETBRAINS_AUTOSTART"
+        echo -e "${GREEN}✓ Autostart do JetBrains Toolbox desabilitado${NC}"
+    fi
+    
+    # Prevenir criação futura do autostart
+    mkdir -p "$AUTOSTART_DIR"
+    tee "$JETBRAINS_AUTOSTART" > /dev/null << 'EOF'
+[Desktop Entry]
+Type=Application
+Name=JetBrains Toolbox
+Exec=false
+Hidden=true
+NoDisplay=true
+X-GNOME-Autostart-enabled=false
+EOF
+    echo -e "${GREEN}✓ Autostart do JetBrains Toolbox bloqueado permanentemente${NC}"
 else
     echo -e "${YELLOW}✗ JetBrains Toolbox não instalado${NC}"
 fi
