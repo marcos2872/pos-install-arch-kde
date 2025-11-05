@@ -233,18 +233,18 @@ yay -S --noconfirm brave-bin discord postman-bin
 echo -e "${GREEN}✓ Pacotes extras instalados${NC}"
 
 echo -e "${YELLOW}Instalando GitHub CLI...${NC}"
-sudo pacman -S --needed --noconfirm github-cli
+yay -S --needed --noconfirm github-cli
 echo -e "${GREEN}✓ GitHub CLI instalado${NC}"
 
 echo -e "${YELLOW}Instalando Claude Desktop...${NC}"
-sudo pacman -S --needed --noconfirm claude-desktop-native
+yay -S --needed --noconfirm claude-desktop-native
 echo -e "${GREEN}✓ Claude Desktop instalado${NC}"
 
 # ===============================================
 # 5.1. CONFIGURAR TEMA STARSHIP (PROMPT TERMINAL)
 # ===============================================
 echo -e "${YELLOW}Configurando tema Starship para o terminal...${NC}"
-sudo pacman -S --needed --noconfirm starship
+yay -S --needed --noconfirm starship
 
 # Criar configuração padrão do Starship se não existir
 mkdir -p "$HOME/.config"
