@@ -281,6 +281,21 @@ echo -e "${YELLOW}Instalando GitHub CLI...${NC}"
 yay -S --needed --noconfirm github-cli
 echo -e "${GREEN}✓ GitHub CLI instalado${NC}"
 
+# Configurar usuário e email do Git
+echo -e "${YELLOW}Configurando usuário e email do Git...${NC}"
+read -p "Digite seu nome para o Git: " git_name
+read -p "Digite seu email para o Git: " git_email
+
+if [ -n "$git_name" ] && [ -n "$git_email" ]; then
+    git config --global user.name "$git_name"
+    git config --global user.email "$git_email"
+    echo -e "${GREEN}✓ Git configurado:${NC}"
+    echo -e "  Nome: $git_name"
+    echo -e "  Email: $git_email"
+else
+    echo -e "${YELLOW}✗ Configuração do Git pulada (nome ou email vazio)${NC}"
+fi
+
 echo -e "${YELLOW}[9/9] Instalando Lazydocker...${NC}"
 yay -S --noconfirm lazydocker-bin
 echo -e "${GREEN}✓ Lazydocker instalado${NC}"
