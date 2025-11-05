@@ -33,7 +33,7 @@ echo -e "${GREEN}✓ Sistema atualizado e pré-requisitos instalados${NC}"
 # ===============================================
 # 1. CONFIGURAR SDDM COM TEMA BREEZE DO PLASMA
 # ===============================================
-echo -e "${YELLOW}[1/8] Configurando SDDM com tema Breeze do Plasma...${NC}"
+echo -e "${YELLOW}[1/9] Configurando SDDM com tema Breeze do Plasma...${NC}"
 
 # Criar diretório de config do SDDM se não existir
 sudo mkdir -p /etc/sddm.conf.d/
@@ -57,7 +57,7 @@ echo -e "${GREEN}✓ SDDM configurado com tema Breeze${NC}"
 # 2. INSTALAR YAY (AUR HELPER)
 # ===============================================
 if ! command -v yay &> /dev/null; then
-    echo -e "${YELLOW}[2/8] Instalando yay (AUR helper)...${NC}"
+    echo -e "${YELLOW}[2/9] Instalando yay (AUR helper)...${NC}"
     cd /tmp
     git clone https://aur.archlinux.org/yay.git
     cd yay
@@ -66,26 +66,26 @@ if ! command -v yay &> /dev/null; then
     rm -rf /tmp/yay
     echo -e "${GREEN}✓ yay instalado${NC}"
 else
-    echo -e "${GREEN}[2/8] yay já está instalado ✓${NC}"
+    echo -e "${GREEN}[2/9] yay já está instalado ✓${NC}"
 fi
 
 # ===============================================
 # 3. INSTALAR RUST
 # ===============================================
 if ! command -v rustc &> /dev/null; then
-    echo -e "${YELLOW}[3/8] Instalando Rust...${NC}"
+    echo -e "${YELLOW}[3/9] Instalando Rust...${NC}"
     curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
     source "$HOME/.cargo/env"
     echo -e "${GREEN}✓ Rust instalado ($(rustc --version))${NC}"
 else
-    echo -e "${GREEN}[3/8] Rust já está instalado ✓ ($(rustc --version))${NC}"
+    echo -e "${GREEN}[3/9] Rust já está instalado ✓ ($(rustc --version))${NC}"
 fi
 
 # ===============================================
 # 4. INSTALAR NVM E NODE.JS
 # ===============================================
 if [ ! -d "$HOME/.nvm" ]; then
-    echo -e "${YELLOW}[4/8] Instalando NVM (última versão)...${NC}"
+    echo -e "${YELLOW}[4/9] Instalando NVM (última versão)...${NC}"
     NVM_TAG=$(curl -fsSL https://api.github.com/repos/nvm-sh/nvm/releases/latest | sed -n 's/.*"tag_name":[[:space:]]*"\(v[^"]*\)".*/\1/p' | head -n1)
     if [ -z "$NVM_TAG" ]; then
         NVM_TAG="v0.40.1"
@@ -116,7 +116,7 @@ if [ ! -d "$HOME/.nvm" ]; then
     fi
     echo -e "${GREEN}✓ pnpm instalado ($(pnpm --version))${NC}"
 else
-    echo -e "${GREEN}[4/8] NVM já está instalado ✓${NC}"
+    echo -e "${GREEN}[4/9] NVM já está instalado ✓${NC}"
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     if command -v node &> /dev/null; then
@@ -153,7 +153,7 @@ fi
 # ===============================================
 # 4. INSTALAR PACOTES DO AUR (OPCIONAIS)
 # ===============================================
-echo -e "${YELLOW}[4/8] Instalando pacotes do AUR...${NC}"
+echo -e "${YELLOW}[4/9] Instalando pacotes do AUR...${NC}"
 
 # Instalar Discord (opcional)
 read -p "Deseja instalar o Discord? (s/n) " install_discord
@@ -162,6 +162,15 @@ if [[ "$install_discord" == "s" ]]; then
     echo -e "${GREEN}✓ Discord instalado${NC}"
 else
     echo -e "${YELLOW}✗ Discord não instalado${NC}"
+fi
+
+# Instalar LocalSend (opcional)
+read -p "Deseja instalar o LocalSend? (s/n) " install_localsend
+if [[ "$install_localsend" == "s" ]]; then
+    yay -S --noconfirm localsend-bin
+    echo -e "${GREEN}✓ LocalSend instalado${NC}"
+else
+    echo -e "${YELLOW}✗ LocalSend não instalado${NC}"
 fi
 
 # Instalar Brave (opcional)
@@ -243,15 +252,19 @@ fi
 # ===============================================
 # 5. INSTALAR PACOTES DO AUR
 # ===============================================
-echo -e "${YELLOW}[5/8] Instalando Visual Studio Code...${NC}"
+echo -e "${YELLOW}[5/9] Instalando Partition Manager...${NC}"
+yay -S --noconfirm partitionmanager
+echo -e "${GREEN}✓ Partition Manager instalado${NC}"
+
+echo -e "${YELLOW}[6/9] Instalando Visual Studio Code...${NC}"
 yay -S --noconfirm visual-studio-code-bin
 echo -e "${GREEN}✓ VSCode instalado${NC}"
 
-echo -e "${YELLOW}[6/8] Instalando Google Chrome...${NC}"
+echo -e "${YELLOW}[7/9] Instalando Google Chrome...${NC}"
 yay -S --noconfirm google-chrome
 echo -e "${GREEN}✓ Chrome instalado${NC}"
 
-echo -e "${YELLOW}[8/8] Instalando Postman...${NC}"
+echo -e "${YELLOW}[8/9] Instalando Postman...${NC}"
 yay -S --noconfirm postman-bin
 echo -e "${GREEN}✓ Postman instalado${NC}"
 
@@ -259,7 +272,7 @@ echo -e "${YELLOW}Instalando GitHub CLI...${NC}"
 yay -S --needed --noconfirm github-cli
 echo -e "${GREEN}✓ GitHub CLI instalado${NC}"
 
-echo -e "${YELLOW}[7/8] Instalando Lazydocker...${NC}"
+echo -e "${YELLOW}[9/9] Instalando Lazydocker...${NC}"
 yay -S --noconfirm lazydocker-bin
 echo -e "${GREEN}✓ Lazydocker instalado${NC}"
 
