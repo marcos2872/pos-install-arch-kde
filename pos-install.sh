@@ -170,6 +170,69 @@ yay -S --noconfirm brave-bin discord postman-bin
 echo -e "${GREEN}✓ Pacotes extras instalados${NC}"
 
 # ===============================================
+# 5.1. CONFIGURAR TEMA STARSHIP (PROMPT TERMINAL)
+# ===============================================
+echo -e "${YELLOW}Configurando tema Starship para o terminal...${NC}"
+sudo pacman -S --needed --noconfirm starship
+
+# Criar configuração padrão do Starship se não existir
+mkdir -p "$HOME/.config"
+if [ ! -f "$HOME/.config/starship.toml" ]; then
+    tee "$HOME/.config/starship.toml" > /dev/null << 'EOF'
+# Configuração básica do Starship
+add_newline = false
+
+[character]
+success_symbol = "[➜](bold green)"
+error_symbol = "[✗](bold red)"
+
+[directory]
+truncation_length = 4
+style = "bold blue"
+
+[git_branch]
+symbol = " "
+
+[nodejs]
+format = "via [ $version](bold green) "
+
+[rust]
+format = "via [ $version](bold red) "
+EOF
+    echo -e "${GREEN}✓ Configuração padrão do Starship criada em ~/.config/starship.toml${NC}"
+else
+    echo -e "${GREEN}Configuração do Starship já existe, mantendo atual${NC}"
+fi
+
+# Habilitar no bash
+if [ -f "$HOME/.bashrc" ]; then
+    if ! grep -q 'starship init bash' "$HOME/.bashrc" 2>/dev/null; then
+        echo 'eval "$(starship init bash)"' >> "$HOME/.bashrc"
+        echo -e "${GREEN}✓ Starship habilitado no bash (~/.bashrc)${NC}"
+    else
+        echo -e "${GREEN}Starship já habilitado no bash${NC}"
+    fi
+else
+    echo 'eval "$(starship init bash)"' >> "$HOME/.bashrc"
+    echo -e "${GREEN}✓ Starship habilitado no bash (~/.bashrc criado)${NC}"
+fi
+
+# Habilitar no zsh (se existir)
+if command -v zsh &> /dev/null; then
+    if [ -f "$HOME/.zshrc" ]; then
+        if ! grep -q 'starship init zsh' "$HOME/.zshrc" 2>/dev/null; then
+            echo 'eval "$(starship init zsh)"' >> "$HOME/.zshrc"
+            echo -e "${GREEN}✓ Starship habilitado no zsh (~/.zshrc)${NC}"
+        else
+            echo -e "${GREEN}Starship já habilitado no zsh${NC}"
+        fi
+    else
+        echo 'eval "$(starship init zsh)"' >> "$HOME/.zshrc"
+        echo -e "${GREEN}✓ Starship habilitado no zsh (~/.zshrc criado)${NC}"
+    fi
+fi
+
+# ===============================================
 # 6. HABILITAR SERVIÇOS
 # ===============================================
 echo -e "${YELLOW}Habilitando serviços do sistema...${NC}"
@@ -202,6 +265,7 @@ echo "  • Rust (rustc, cargo)"
 echo "  • Node.js (via NVM)"
 echo "  • npm"
 echo "  • pnpm"
+echo "  • Starship (prompt do terminal)"
 echo ""
 echo -e "${BLUE}Aplicativos instalados:${NC}"
 echo "  • Visual Studio Code"
