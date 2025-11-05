@@ -165,6 +165,70 @@ echo -e "${YELLOW}[7/8] Instalando Lazydocker...${NC}"
 yay -S --noconfirm lazydocker-bin
 echo -e "${GREEN}✓ Lazydocker instalado${NC}"
 
+# Criar atalho do Lazydocker com ícone docker.png
+echo -e "${YELLOW}Criando atalho do Lazydocker...${NC}"
+
+# Diretórios e caminhos
+SCRIPT_DIR=$(cd "$(dirname "${BASH_SOURCE[0]}")" >/dev/null 2>&1 && pwd || echo "")
+APPLICATIONS_DIR="$HOME/.local/share/applications"
+DESKTOP_FILE="$APPLICATIONS_DIR/lazydocker.desktop"
+ICON_DIR="$HOME/.local/share/icons"
+ICON_DEST="$ICON_DIR/docker.png"
+
+mkdir -p "$APPLICATIONS_DIR" "$ICON_DIR"
+
+# Encontrar a imagem docker.png preferindo repo/images, depois /images, depois ~/images
+ICON_SOURCE=""
+if [ -n "$SCRIPT_DIR" ] && [ -f "$SCRIPT_DIR/images/docker.png" ]; then
+    ICON_SOURCE="$SCRIPT_DIR/images/docker.png"
+elif [ -f "/images/docker.png" ]; then
+    ICON_SOURCE="/images/docker.png"
+elif [ -f "$HOME/images/docker.png" ]; then
+    ICON_SOURCE="$HOME/images/docker.png"
+fi
+
+ICON_ENTRY="lazydocker"
+if [ -n "$ICON_SOURCE" ]; then
+    cp -f "$ICON_SOURCE" "$ICON_DEST"
+    ICON_ENTRY="$ICON_DEST"
+    echo -e "${GREEN}✓ Ícone copiado para $ICON_DEST${NC}"
+else
+    echo -e "${YELLOW}Imagem docker.png não encontrada em images/. Usando ícone padrão do sistema.${NC}"
+fi
+
+# Escolher comando Exec: usar Konsole se disponível
+if command -v konsole &> /dev/null; then
+    EXEC_CMD="konsole -e lazydocker"
+    TERMINAL_FLAG="false"
+else
+    EXEC_CMD="lazydocker"
+    TERMINAL_FLAG="true"
+fi
+
+tee "$DESKTOP_FILE" > /dev/null << EOF
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=Lazydocker
+Comment=UI de terminal para Docker e Docker Compose
+Exec=$EXEC_CMD
+Terminal=$TERMINAL_FLAG
+Icon=$ICON_ENTRY
+Categories=System;Utility;Development;
+StartupNotify=false
+EOF
+
+chmod +x "$DESKTOP_FILE"
+echo -e "${GREEN}✓ Atalho criado: $DESKTOP_FILE${NC}"
+
+# Copiar atalho para a Área de Trabalho (se existir diretório)
+DESKTOP_DIR=$(command -v xdg-user-dir &> /dev/null && xdg-user-dir DESKTOP || echo "$HOME/Desktop")
+if [ -d "$DESKTOP_DIR" ]; then
+    cp -f "$DESKTOP_FILE" "$DESKTOP_DIR/lazydocker.desktop"
+    chmod +x "$DESKTOP_DIR/lazydocker.desktop"
+    echo -e "${GREEN}✓ Atalho também disponível na Área de Trabalho: $DESKTOP_DIR/lazydocker.desktop${NC}"
+fi
+
 echo -e "${YELLOW}[8/8] Instalando pacotes extras...${NC}"
 yay -S --noconfirm brave-bin discord postman-bin
 echo -e "${GREEN}✓ Pacotes extras instalados${NC}"
