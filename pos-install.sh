@@ -151,6 +151,56 @@ else
 fi
 
 # ===============================================
+# 4. INSTALAR PACOTES DO AUR (OPCIONAIS)
+# ===============================================
+echo -e "${YELLOW}[4/8] Instalando pacotes do AUR...${NC}"
+
+# Instalar Discord (opcional)
+read -p "Deseja instalar o Discord? (s/n) " install_discord
+if [[ "$install_discord" == "s" ]]; then
+    yay -S --noconfirm discord
+    echo -e "${GREEN}✓ Discord instalado${NC}"
+else
+    echo -e "${YELLOW}✗ Discord não instalado${NC}"
+fi
+
+# Instalar Brave (opcional)
+read -p "Deseja instalar o Brave? (s/n) " install_brave
+if [[ "$install_brave" == "s" ]]; then
+    yay -S --noconfirm brave-bin
+    echo -e "${GREEN}✓ Brave instalado${NC}"
+else
+    echo -e "${YELLOW}✗ Brave não instalado${NC}"
+fi
+
+# Instalar Claude Desktop (opcional)
+read -p "Deseja instalar o Claude Desktop? (s/n) " install_claude
+if [[ "$install_claude" == "s" ]]; then
+    yay -S --noconfirm claude-desktop-native
+    echo -e "${GREEN}✓ Claude Desktop instalado${NC}"
+else
+    echo -e "${YELLOW}✗ Claude Desktop não instalado${NC}"
+fi
+
+# Instalar Zed (opcional)
+read -p "Deseja instalar o Zed? (s/n) " install_zed
+if [[ "$install_zed" == "s" ]]; then
+    curl -fsSL https://zed.dev/download | sh
+    echo -e "${GREEN}✓ Zed instalado${NC}"
+else
+    echo -e "${RED}✗ Instalação do Zed pulada${NC}"
+fi
+
+# Instalar JetBrains Toolbox (opcional)
+read -p "Deseja instalar o jetbrains-toolbox? (s/n) " install_jetbrains
+if [[ "$install_jetbrains" == "s" ]]; then
+    yay -S --noconfirm jetbrains-toolbox
+    echo -e "${GREEN}✓ JetBrains Toolbox instalado${NC}"
+else
+    echo -e "${YELLOW}✗ JetBrains Toolbox não instalado${NC}"
+fi
+
+# ===============================================
 # 5. INSTALAR PACOTES DO AUR
 # ===============================================
 echo -e "${YELLOW}[5/8] Instalando Visual Studio Code...${NC}"
@@ -161,14 +211,6 @@ echo -e "${YELLOW}[6/8] Instalando Google Chrome...${NC}"
 yay -S --noconfirm google-chrome
 echo -e "${GREEN}✓ Chrome instalado${NC}"
 
-echo -e "${YELLOW}[8/8] Instalando Brave...${NC}"
-yay -S --noconfirm brave-bin
-echo -e "${GREEN}✓ Brave instalado${NC}"
-
-echo -e "${YELLOW}[8/8] Instalando Discord...${NC}"
-yay -S --noconfirm discord
-echo -e "${GREEN}✓ Discord instalado${NC}"
-
 echo -e "${YELLOW}[8/8] Instalando Postman...${NC}"
 yay -S --noconfirm postman-bin
 echo -e "${GREEN}✓ Postman instalado${NC}"
@@ -176,10 +218,6 @@ echo -e "${GREEN}✓ Postman instalado${NC}"
 echo -e "${YELLOW}Instalando GitHub CLI...${NC}"
 yay -S --needed --noconfirm github-cli
 echo -e "${GREEN}✓ GitHub CLI instalado${NC}"
-
-echo -e "${YELLOW}Instalando Claude Desktop...${NC}"
-yay -S --needed --noconfirm claude-desktop-native
-echo -e "${GREEN}✓ Claude Desktop instalado${NC}"
 
 echo -e "${YELLOW}[7/8] Instalando Lazydocker...${NC}"
 yay -S --noconfirm lazydocker-bin
