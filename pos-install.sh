@@ -161,6 +161,18 @@ echo -e "${YELLOW}[6/8] Instalando Google Chrome...${NC}"
 yay -S --noconfirm google-chrome
 echo -e "${GREEN}✓ Chrome instalado${NC}"
 
+echo -e "${YELLOW}[8/8] Instalando pacotes extras...${NC}"
+yay -S --noconfirm brave-bin discord postman-bin
+echo -e "${GREEN}✓ Pacotes extras instalados${NC}"
+
+echo -e "${YELLOW}Instalando GitHub CLI...${NC}"
+yay -S --needed --noconfirm github-cli
+echo -e "${GREEN}✓ GitHub CLI instalado${NC}"
+
+echo -e "${YELLOW}Instalando Claude Desktop...${NC}"
+yay -S --needed --noconfirm claude-desktop-native
+echo -e "${GREEN}✓ Claude Desktop instalado${NC}"
+
 echo -e "${YELLOW}[7/8] Instalando Lazydocker...${NC}"
 yay -S --noconfirm lazydocker-bin
 echo -e "${GREEN}✓ Lazydocker instalado${NC}"
@@ -227,18 +239,6 @@ EOF
 
 chmod +x "$DESKTOP_FILE"
 echo -e "${GREEN}✓ Atalho criado no menu: $DESKTOP_FILE${NC}"
-
-echo -e "${YELLOW}[8/8] Instalando pacotes extras...${NC}"
-yay -S --noconfirm brave-bin discord postman-bin
-echo -e "${GREEN}✓ Pacotes extras instalados${NC}"
-
-echo -e "${YELLOW}Instalando GitHub CLI...${NC}"
-yay -S --needed --noconfirm github-cli
-echo -e "${GREEN}✓ GitHub CLI instalado${NC}"
-
-echo -e "${YELLOW}Instalando Claude Desktop...${NC}"
-yay -S --needed --noconfirm claude-desktop-native
-echo -e "${GREEN}✓ Claude Desktop instalado${NC}"
 
 # ===============================================
 # 5.1. CONFIGURAR TEMA STARSHIP (PROMPT TERMINAL)
