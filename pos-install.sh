@@ -215,7 +215,7 @@ if [[ "$install_zed" == "s" ]]; then
     curl -f https://zed.dev/install.sh | sh
     echo -e "${GREEN}✓ Zed instalado${NC}"
 else
-    echo -e "${RED}✗ Instalação do Zed pulada${NC}"
+    echo -e "${YELLOW}✗ Zed não instalado${NC}"
 fi
 
 # Instalar JetBrains Toolbox (opcional)
