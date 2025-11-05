@@ -164,6 +164,15 @@ else
     echo -e "${YELLOW}✗ Discord não instalado${NC}"
 fi
 
+# Instalar VLC (opcional)
+read -p "Deseja instalar o VLC? (s/n) " install_vlc
+if [[ "$install_vlc" == "s" ]]; then
+    yay -S --noconfirm vlc vlc-plugins-all
+    echo -e "${GREEN}✓ VLC instalado${NC}"
+else
+    echo -e "${YELLOW}✗ VLC não instalado${NC}"
+fi
+
 # Instalar LocalSend (opcional)
 read -p "Deseja instalar o LocalSend? (s/n) " install_localsend
 if [[ "$install_localsend" == "s" ]]; then
