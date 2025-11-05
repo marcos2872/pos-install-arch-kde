@@ -236,6 +236,10 @@ echo -e "${YELLOW}Instalando GitHub CLI...${NC}"
 sudo pacman -S --needed --noconfirm github-cli
 echo -e "${GREEN}✓ GitHub CLI instalado${NC}"
 
+echo -e "${YELLOW}Instalando Claude Desktop...${NC}"
+sudo pacman -S --needed --noconfirm claude-desktop-native
+echo -e "${GREEN}✓ Claude Desktop instalado${NC}"
+
 # ===============================================
 # 5.1. CONFIGURAR TEMA STARSHIP (PROMPT TERMINAL)
 # ===============================================
