@@ -231,6 +231,7 @@ fi
 read -p "Deseja instalar o Zed? (s/n) " install_zed
 if [[ "$install_zed" == "s" ]]; then
     curl -f https://zed.dev/install.sh | sh
+    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
     echo -e "${GREEN}✓ Zed instalado${NC}"
 else
     echo -e "${YELLOW}✗ Zed não instalado${NC}"
@@ -282,6 +283,10 @@ fi
 echo -e "${YELLOW}[5/9] Instalando Partition Manager...${NC}"
 yay -S --noconfirm partitionmanager
 echo -e "${GREEN}✓ Partition Manager instalado${NC}"
+
+echo -e "${YELLOW}[5/9] Instalando Unzip...${NC}"
+yay -S --noconfirm unzip
+echo -e "${GREEN}✓ Unzip instalado${NC}"
 
 echo -e "${YELLOW}[7/9] Instalando Google Chrome...${NC}"
 yay -S --noconfirm google-chrome
