@@ -5,6 +5,10 @@ echo "║ Transformando Fedora KDE em macOS (MacTahoe Theme)         ║"
 echo "╚════════════════════════════════════════════════════════════╝"
 echo ""
 
+# 0. Capturar diretório original para referenciar arquivos de configuração
+ORIGINAL_DIR=$(pwd)
+echo "📂 Diretório de origem: $ORIGINAL_DIR"
+
 # Função para pausar e mostrar erros
 pause_on_error() {
   if [ $? -ne 0 ]; then
@@ -146,6 +150,8 @@ else
 fi
 rm -rf ~/cursor-eyes-temp
 
+# 8. Restaurar Configuração do Painel (Personalizada)
+echo ""
 # Adicionar Widgets ao Painel via Script Plasma
 echo "   - Adicionando 'System Monitor' e 'Cursor Eyes' ao painel..."
 # Nota: O widget ID 'luisbocanegra.cursor.eyes' correspode ao item da KDE Store: https://store.kde.org/p/2183752
