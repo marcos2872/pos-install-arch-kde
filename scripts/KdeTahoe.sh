@@ -211,6 +211,39 @@ fi
 pause_on_error
 echo "✅ Ícone atualizado!"
 
+# 10. Instalar Splash Screen Kuro
+echo ""
+echo "🎨 Instalando Splash Screen Kuro..."
+if [ -d ~/kuro-temp ]; then rm -rf ~/kuro-temp; fi
+mkdir -p ~/kuro-temp
+git clone https://github.com/bouteillerAlan/kuro.git ~/kuro-temp 2>&1
+pause_on_error
+
+mkdir -p ~/.local/share/plasma/look-and-feel/
+cp -r ~/kuro-temp/a2n.kuro ~/.local/share/plasma/look-and-feel/
+rm -rf ~/kuro-temp
+
+# Configurar Splash Screen
+echo "   - Configurando Splash Screen..."
+if command -v kwriteconfig6 &> /dev/null; then
+    kwriteconfig6 --file ksplashrc --group KSplash --key Theme a2n.kuro
+    kwriteconfig6 --file ksplashrc --group KSplash --key Engine KSplashQML
+elif command -v kwriteconfig5 &> /dev/null; then
+    kwriteconfig5 --file ksplashrc --group KSplash --key Theme a2n.kuro
+    kwriteconfig5 --file ksplashrc --group KSplash --key Engine KSplashQML
+else
+    # Fallback manual
+    if ! grep -q "\[KSplash\]" ~/.config/ksplashrc; then
+        echo "[KSplash]" >> ~/.config/ksplashrc
+    fi
+    # Remove existing keys if any
+    sed -i '/^Theme=/d' ~/.config/ksplashrc
+    sed -i '/^Engine=/d' ~/.config/ksplashrc
+    # Add new keys
+    sed -i '/\[KSplash\]/a Theme=a2n.kuro\nEngine=KSplashQML' ~/.config/ksplashrc
+fi
+echo "✅ Splash Screen instalado!"
+
 echo ""
 echo "╔════════════════════════════════════════════════════════════╗"
 echo "║ ✅ INSTALAÇÃO CONCLUÍDA!                                   ║"
