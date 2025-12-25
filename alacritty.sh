@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "╔════════════════════════════════════════════════════════════╗"
-echo "║ Configurando Alacritty como o Terminal do macOS            ║"
+echo "║ Configurando Alacritty                                     ║"
 echo "╚════════════════════════════════════════════════════════════╝"
 echo ""
 
@@ -38,7 +38,7 @@ pause_on_error
 echo "✅ Temas baixados!"
 echo ""
 
-# 4. Criar/atualizar o arquivo alacritty.toml com visual estilo macOS
+# 4. Criar/atualizar o arquivo alacritty.toml com visual estilo vscode
 ALACRITTY_CONF=~/.config/alacritty/alacritty.toml
 
 echo "📝 Escrevendo configuração em $ALACRITTY_CONF ..."
