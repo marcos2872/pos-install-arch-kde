@@ -38,7 +38,7 @@ echo "📁 Pasta criada em: $(pwd)"
 # 3. MacTahoe KDE (tema Plasma + Kvantum)
 echo ""
 echo "🎨 Baixando MacTahoe KDE Theme..."
-git clone https://github.com/vinceliuice/MacTahoe-kde.git 2>&1
+git clone https://github.com/marcos2872/MacTahoe-kde.git 2>&1
 pause_on_error
 
 cd MacTahoe-kde
@@ -50,7 +50,7 @@ cd ..
 # 4. MacTahoe Icons
 echo ""
 echo "🖼️ Baixando MacTahoe Icons..."
-git clone https://github.com/vinceliuice/MacTahoe-icon-theme.git 2>&1
+git clone https://github.com/marcos2872/MacTahoe-icon-theme.git 2>&1
 pause_on_error
 
 cd MacTahoe-icon-theme
@@ -62,7 +62,7 @@ cd ..
 # 5. MacTahoe Cursors
 echo ""
 echo "🖱️ Baixando MacTahoe Cursors..."
-git clone https://github.com/vinceliuice/MacTahoe-icon-theme.git MacTahoe-cursors-src 2>&1
+git clone https://github.com/marcos2872/MacTahoe-icon-theme.git MacTahoe-cursors-src 2>&1
 pause_on_error
 
 cd MacTahoe-cursors-src/cursors
@@ -163,7 +163,7 @@ if (allPanels.length > 0) {
     // Adiciona System Monitor Sensor
     // ID genérico para o monitor do sistema gráficos. Pode variar, tentando org.kde.plasma.systemmonitor
     p.addWidget("org.kde.plasma.systemmonitor");
-    
+
     // Adiciona Cursor Eyes (https://store.kde.org/p/2183752)
     p.addWidget("luisbocanegra.cursor.eyes");
 }
