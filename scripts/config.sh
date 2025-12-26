@@ -35,7 +35,20 @@ fi
 echo ""
 echo "🎨 Aplicando configurações de tema..."
 
-# 1) Configurar Kvantum
+# 1) Aplicar Tema Global (Look-and-Feel)
+echo "   - Aplicando Tema Global MacTahoe-Dark..."
+if command -v lookandfeeltool &> /dev/null; then
+    lookandfeeltool -a com.github.vinceliuice.MacTahoe-Dark 2>&1
+elif command -v plasma-apply-lookandfeel &> /dev/null; then
+    plasma-apply-lookandfeel -a com.github.vinceliuice.MacTahoe-Dark 2>&1
+else
+    echo "⚠️  Não foi possível encontrar lookandfeeltool/plasma-apply-lookandfeel."
+fi
+pause_on_error
+
+echo "✅ Tema global e Kvantum configurados!"
+
+# 2) Configurar Kvantum
 echo "   - Configurando Kvantum para usar MacTahoeDark..."
 mkdir -p ~/.config/Kvantum
 if [ -f ~/.config/Kvantum/kvantum.kvconfig ]; then
@@ -52,19 +65,6 @@ else
   echo -e "[General]\ntheme=MacTahoeDark" > ~/.config/Kvantum/kvantum.kvconfig
 fi
 pause_on_error
-
-# 2) Aplicar Tema Global (Look-and-Feel)
-echo "   - Aplicando Tema Global MacTahoe-Dark..."
-if command -v lookandfeeltool &> /dev/null; then
-    lookandfeeltool -a com.github.vinceliuice.MacTahoe-Dark 2>&1
-elif command -v plasma-apply-lookandfeel &> /dev/null; then
-    plasma-apply-lookandfeel -a com.github.vinceliuice.MacTahoe-Dark 2>&1
-else
-    echo "⚠️  Não foi possível encontrar lookandfeeltool/plasma-apply-lookandfeel."
-fi
-pause_on_error
-
-echo "✅ Tema global e Kvantum configurados!"
 
 # 3) Instalar e Configurar Widgets (Cursor Eyes)
 echo ""
@@ -222,5 +222,3 @@ echo ""
 echo "O tema MacTahoe-Dark foi aplicado (Kvantum + Look-and-Feel), widgets e"
 echo "ícones do launcher configurados, e Splash Kuro definido."
 echo "Pode ser necessário reiniciar a sessão do KDE para ver todas as alterações."
-echo "Pressione ENTER para fechar..."
-read
