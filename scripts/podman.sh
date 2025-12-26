@@ -1,6 +1,5 @@
 #!/bin/bash
 sudo dnf install -y podman podman-docker podman-compose
-source ~/.bashrc
 flatpak install --user -y flathub io.podman_desktop.PodmanDesktop
 
 echo "Instalando Lazydocker..."

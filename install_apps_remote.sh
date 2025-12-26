@@ -33,6 +33,7 @@ MODULE_ORDER=(
   "pyenv.sh"
   "node.sh"
   "git_gh.sh"
+  "flatpak.sh"
   "fonts.sh"
   "starship.sh"
   "alacritty.sh"
@@ -46,8 +47,8 @@ MODULE_ORDER=(
   "chrome.sh"
   "claude.sh"
   "mcp.sh"
-  "kde_tahoe.sh"
   "audiorelay.sh"
+  "kde_tahoe.sh"
   "config.sh"
 )
 
