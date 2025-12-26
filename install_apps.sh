@@ -43,6 +43,7 @@ run_script "chrome.sh" "Instalando Google Chrome"
 run_script "claude.sh" "Instalando Claude Desktop"
 run_script "mcp.sh" "Instalando OS MCP"
 run_script "kde_tahoe.sh" "Instalando KdeTahoe"
+run_script "config.sh" "Instalando Configurações"
 
 echo -e "\n${GREEN}=== Instalação Completa! ===${NC}"
 echo "Por favor, reinicie sua sessão."
