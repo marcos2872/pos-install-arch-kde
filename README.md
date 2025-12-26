@@ -51,3 +51,22 @@ Leitura recomendada
 Contribuições
 - Abra uma issue para discutir mudanças maiores.
 - Envie PRs com script testado + atualização em `install_apps.sh` e nota no README quando relevante.
+
+Instalador remoto (sem clonar)
+- É possível executar o instalador sem clonar o repositório usando o script remoto.
+- Raw URL do instalador remoto:
+  https://raw.githubusercontent.com/marcos2872/pos-install-fedora-kde/main/install_apps_remote.sh
+
+Exemplo (baixar e executar localmente)
+```pos-install-fedora-kde/README.md#L1-3
+curl -fsSL https://raw.githubusercontent.com/marcos2872/pos-install-fedora-kde/main/install_apps_remote.sh -o install_apps_remote.sh
+chmod +x install_apps_remote.sh
+./install_apps_remote.sh
+```
+
+Inspeção segura
+- Para apenas baixar os scripts e inspecioná-los antes de executar:
+```pos-install-fedora-kde/README.md#L1-2
+./install_apps_remote.sh --fetch-only --keep-temp
+```
+- Recomendo revisar os arquivos baixados antes de executar em sistemas de produção.
