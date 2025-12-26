@@ -30,6 +30,7 @@ FETCH_ONLY=false
 MODULE_ORDER=(
   "dev_tools.sh"
   "rust.sh"
+  "pyenv.sh"
   "node.sh"
   "git_gh.sh"
   "fonts.sh"

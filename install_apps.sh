@@ -29,6 +29,7 @@ echo -e "${GREEN}Iniciando instalação modular...${NC}"
 
 run_script "dev_tools.sh" "Instalando Development Tools"
 run_script "rust.sh" "Instalando Rust"
+run_script "pyenv.sh" "Instalando pyenv"
 run_script "node.sh" "Instalando Node (NVM)"
 run_script "git_gh.sh" "Configurando Git e GH"
 run_script "fonts.sh" "Instalando Fonts"
