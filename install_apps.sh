@@ -23,7 +23,7 @@ run_script() {
     fi
 }
 
-# sudo dnf upgrade -y
+sudo dnf upgrade -y
 
 echo -e "${GREEN}Iniciando instalação modular...${NC}"
 
