@@ -13,15 +13,17 @@ chmod +x "$SCRIPT_DIR"/*.sh
 run_script() {
     local script_name=$1
     local description=$2
-    
+
     echo -e "\n${GREEN}=== $description ===${NC}"
     "$SCRIPT_DIR/$script_name"
-    
+
     if [ $? -ne 0 ]; then
         echo -e "${RED}Erro ao executar $script_name. Pressione ENTER para continuar ou Ctrl+C para abortar.${NC}"
         read
     fi
 }
+
+sudo dnf upgrade -y
 
 echo -e "${GREEN}Iniciando instalação modular...${NC}"
 
@@ -40,7 +42,7 @@ run_script "brave.sh" "Instalando Brave Browser"
 run_script "chrome.sh" "Instalando Google Chrome"
 run_script "claude.sh" "Instalando Claude Desktop"
 run_script "mcp.sh" "Instalando OS MCP"
-run_script "kdetahoe.sh" "Instalando KdeTahoe"
+run_script "kde_tahoe.sh" "Instalando KdeTahoe"
 
 echo -e "\n${GREEN}=== Instalação Completa! ===${NC}"
 echo "Por favor, reinicie sua sessão."

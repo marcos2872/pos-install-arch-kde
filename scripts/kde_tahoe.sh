@@ -159,7 +159,7 @@ ADD_WIDGETS_vn_SCRIPT=$(cat <<EOF
 var allPanels = panels();
 if (allPanels.length > 0) {
     var p = allPanels[0];
-    
+
     // Adiciona System Monitor Sensor
     // ID genérico para o monitor do sistema gráficos. Pode variar, tentando org.kde.plasma.systemmonitor
     p.addWidget("org.kde.plasma.systemmonitor");
@@ -251,4 +251,3 @@ echo "╚═══════════════════════�
 echo ""
 echo "O tema MacTahoe-Dark foi aplicado."
 echo "Pressione ENTER para fechar..."
-read

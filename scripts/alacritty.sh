@@ -85,4 +85,3 @@ echo "2. Se tiver a fonte Menlo instalada, ela será usada; senão, use o Fira C
 echo "3. Ajuste tamanho da fonte, padding ou opacidade editando ~/.config/alacritty/alacritty.toml."
 echo ""
 echo "Pressione ENTER para fechar..."
-read
