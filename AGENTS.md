@@ -17,7 +17,9 @@ Para executar com previsibilidade, o agente precisa entender a estrutura do proj
 
 - Fonte de verdade da ordem:
   - O arquivo `install_apps.sh` define a sequência oficial dos módulos. O agente deve inferir a ordem e o conjunto de módulos a partir dele.
+  - Complemento remoto: existe também um instalador remoto `install_apps_remote.sh` que espelha a ordem em sua variável `MODULE_ORDER`. O agente deve ler esse arquivo (quando presente) para confirmar a ordem usada pelo instalador remoto e para permitir execução/validação remota sem clonar o repositório.
   - Convenção: o instalador normalmente chama cada script dentro de `scripts/` na ordem definida por uma lista/array e/ou blocos sequenciais.
+  - Regra de consistência: ao adicionar ou remover módulos, atualize tanto `install_apps.sh` quanto `install_apps_remote.sh` (se aplicável) para manter a ordem sincronizada. Se houver divergência entre as duas fontes, priorize `install_apps.sh` para execuções locais e reporte a discrepância para revisão.
 
 - Como o agente obtém o contexto:
   1) Ler `install_apps.sh` para:

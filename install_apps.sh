@@ -23,7 +23,7 @@ run_script() {
     fi
 }
 
-sudo dnf upgrade -y
+# sudo dnf upgrade -y
 
 echo -e "${GREEN}Iniciando instalação modular...${NC}"
 
@@ -43,6 +43,8 @@ run_script "chrome.sh" "Instalando Google Chrome"
 run_script "claude.sh" "Instalando Claude Desktop"
 run_script "mcp.sh" "Instalando OS MCP"
 run_script "kde_tahoe.sh" "Instalando KdeTahoe"
+run_script "audiorelay.sh" "Instalando AudioRelay"
+
 run_script "config.sh" "Instalando Configurações"
 
 echo -e "\n${GREEN}=== Instalação Completa! ===${NC}"

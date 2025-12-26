@@ -44,6 +44,7 @@ MODULE_ORDER=(
   "claude.sh"
   "mcp.sh"
   "kde_tahoe.sh"
+  "audiorelay.sh"
   "config.sh"
 )
 
